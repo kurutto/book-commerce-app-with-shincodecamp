@@ -4,8 +4,7 @@ import React from "react";
 
 //paramsのidはディレクトリの[]の中身がidだから
 const DetailBook = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
-  const book = await getDetailBook(id);
+  const book = await getDetailBook(params.id);
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -24,8 +23,12 @@ const DetailBook = async ({ params }: { params: { id: string } }) => {
           />
 
           <div className="flex justify-between items-center mt-2">
-            <span className="text-sm text-gray-500">公開日:{new Date(book.publishedAt!).toLocaleString()}</span>
-            <span className="text-sm text-gray-500">最終更新:{new Date(book.updatedAt).toLocaleString()}</span>
+            <span className="text-sm text-gray-500">
+              公開日:{new Date(book.publishedAt!).toLocaleString()}
+            </span>
+            <span className="text-sm text-gray-500">
+              最終更新:{new Date(book.updatedAt).toLocaleString()}
+            </span>
           </div>
         </div>
       </div>
