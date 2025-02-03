@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-let prisma:PrismaClient;
+// let prisma:PrismaClient;
 
 //次の方法だとホットリロードするたびにPrismaClient のインスタンスを何個も生成してしまうからglobalに生成する方法にする。
 // prisma = new PrismaClient();
@@ -14,6 +14,6 @@ if(!globalForPrisma.prisma){
   globalForPrisma.prisma = new PrismaClient();
 }
 
-prisma = globalForPrisma.prisma;
+const prisma:PrismaClient = globalForPrisma.prisma;
 
 export default prisma;
