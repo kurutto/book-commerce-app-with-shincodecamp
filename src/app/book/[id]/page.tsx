@@ -1,10 +1,13 @@
 import { getDetailBook } from "@/app/lib/microcms/client";
 import Image from "next/image";
 import React from "react";
-
+type DetailBookProps = {
+  params: Promise<{ id: string }>;
+};
 //paramsのidはディレクトリの[]の中身がidだから
-const DetailBook = async ({ params }: { params: { id: string } }) => {
-  const book = await getDetailBook(params.id);
+const DetailBook = async ({ params }: DetailBookProps) => {
+  const { id } = await params;
+  const book = await getDetailBook(id);
   return (
     <div className="container mx-auto p-4">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
