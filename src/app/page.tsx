@@ -7,7 +7,7 @@ import { Purchase, User } from "./types/types";
 export default async function Home() {
   const { contents } = await getAllBooks();
   const session = await getServerSession(nextAuthOptions);
-  const user: User = session?.user as User; //user:Userではなくas Userと型キャストにすることで存在するときだけUserの型をつけることができる。
+  const user = session?.user as User; //user:Userではなくas Userと型キャストにすることで存在するときだけUserの型をつけることができる。
   let purchaseBookIds: string[];
   if (user) {
     const response = await fetch(
