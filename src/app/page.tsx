@@ -15,7 +15,6 @@ export default async function Home() {
       { cache: "no-store" }
     );
     const purchasesData = await response.json();
-    console.log('purchasesDataは',purchasesData);
     purchaseBookIds = purchasesData.map(
       (purchaseBook: Purchase) => purchaseBook.bookId
     );
