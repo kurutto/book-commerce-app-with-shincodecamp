@@ -4,19 +4,21 @@ import { getAllBooks } from "./lib/microcms/client";
 import { nextAuthOptions } from "./lib/next-auth/options";
 import { Purchase, User } from "./types/types";
 
-
-
-// eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
-  const {contents} = await getAllBooks();
+  const { contents } = await getAllBooks();
   const session = await getServerSession(nextAuthOptions);
-  const user:User = session?.user as User; //user:Userではなくas Userと型キャストにすることで存在するときだけUserの型をつけることができる。
-  let purchaseBookIds:string[];
-  if(user){
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,{cache:'no-store'});
+  const user: User = session?.user as User; //user:Userではなくas Userと型キャストにすることで存在するときだけUserの型をつけることができる。
+  let purchaseBookIds: string[];
+  if (user) {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,
+      { cache: "no-store" }
+    );
     const purchasesData = await response.json();
     console.log(purchasesData);
-    purchaseBookIds = purchasesData.map((purchaseBook:Purchase) => purchaseBook.bookId)
+    purchaseBookIds = purchasesData.map(
+      (purchaseBook: Purchase) => purchaseBook.bookId
+    );
   }
   return (
     <>
@@ -25,7 +27,11 @@ export default async function Home() {
           Book Commerce
         </h2>
         {contents.map((book) => (
-          <Book key={book.id} book={book} isPurchased={purchaseBookIds?.includes(book.id)} />
+          <Book
+            key={book.id}
+            book={book}
+            isPurchased={purchaseBookIds?.includes(book.id)}
+          />
         ))}
       </main>
     </>
