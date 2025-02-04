@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2025-01-27.acacia",
+  typescript: true,
+});
 export async function POST(request: Request) {
   const { title, price, bookId, userId } = await request.json();
   console.log(title, price);
@@ -30,7 +33,7 @@ export async function POST(request: Request) {
       cancel_url: "http://localhost:3000",
     });
     return NextResponse.json({ checkout_url: session.url });
-  } catch (err:unknown) {
+  } catch (err: unknown) {
     // return NextResponse.json(err.message);
     if (err instanceof Error) {
       return NextResponse.json({ error: err.message });
