@@ -28,7 +28,7 @@ const PurchaseSuccess = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [sessionId]);
   return (
     <div className="flex items-center justify-center mt-20">
       <div className="bg-white p-6 rounded-lg shadow-lg">
