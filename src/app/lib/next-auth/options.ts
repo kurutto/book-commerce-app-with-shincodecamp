@@ -6,6 +6,7 @@ import prisma from "../prisma";
 //オプションは　https://next-auth.js.org/configuration/options
 export const nextAuthOptions:NextAuthOptions = {
   debug: false,
+  secret:process.env.SECRET,
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID!,
