@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export async function POST(request: Request) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  const stripe = await new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2025-01-27.acacia",
     typescript: true,
   });
   const { title, price, bookId, userId } = await request.json();
-  console.log(title, price);
+  // console.log(title, price);
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
