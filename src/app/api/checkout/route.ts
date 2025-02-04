@@ -2,10 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 export async function POST(request: Request) {
-  const stripe = await new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2025-01-27.acacia",
-    typescript: true,
-  });
+  const stripe = await new Stripe(process.env.STRIPE_SECRET_KEY!);
   const { title, price, bookId, userId } = await request.json();
   // console.log(title, price);
   try {
