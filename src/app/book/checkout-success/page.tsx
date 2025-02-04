@@ -11,7 +11,7 @@ const PurchaseSuccess = () => {
     const fetchData = async () => {
       if (sessionId) {
         try {
-          const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout/success`, {
+          const res = await fetch(`${process.env.API_URL}/checkout/success`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

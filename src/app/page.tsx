@@ -11,7 +11,7 @@ export default async function Home() {
   let purchaseBookIds: string[];
   if (user) {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,
+      `${process.env.API_URL}/purchases/${user.id}`,
       { cache: "no-store" }
     );
     const purchasesData = await response.json();

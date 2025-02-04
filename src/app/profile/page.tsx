@@ -8,11 +8,15 @@ import PurchaseDetailBook from "../components/PurchaseDetailBook";
 export default async function ProfilePage() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,{cache:'no-store'});
+  const res = await fetch(`${process.env.API_URL}/purchases/${user.id}`, {
+    cache: "no-store",
+  });
   const purchaseData = await res.json();
-  const purchaseDetailBooks = await Promise.all(purchaseData.map(async (purchase:Purchase) => {
-    return await getDetailBook(purchase.bookId);
-  }))
+  const purchaseDetailBooks = await Promise.all(
+    purchaseData.map(async (purchase: Purchase) => {
+      return await getDetailBook(purchase.bookId);
+    })
+  );
   console.log(purchaseData);
 
   return (
@@ -35,8 +39,11 @@ export default async function ProfilePage() {
 
       <span className="font-medium text-lg mb-4 mt-4 block">購入した記事</span>
       <div className="flex items-center gap-6">
-        {purchaseDetailBooks.map((purchaseDetailBook:BookType) => (
-          <PurchaseDetailBook key={purchaseDetailBook.id} purchaseDetailBook={purchaseDetailBook} />
+        {purchaseDetailBooks.map((purchaseDetailBook: BookType) => (
+          <PurchaseDetailBook
+            key={purchaseDetailBook.id}
+            purchaseDetailBook={purchaseDetailBook}
+          />
         ))}
       </div>
     </div>
