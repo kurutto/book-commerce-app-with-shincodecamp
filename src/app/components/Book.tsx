@@ -11,7 +11,6 @@ type BookProps = {
   isPurchased: boolean;
 };
 
-// eslint-disable-next-line react/display-name
 const Book = ({ book, isPurchased }: BookProps) => {
   const [showModal, setShowModal] = useState(false);
   const { data: session } = useSession();
@@ -40,7 +39,7 @@ const Book = ({ book, isPurchased }: BookProps) => {
         router.push(responseData.checkout_url);
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
   const handlePurchaseClick = () => {
