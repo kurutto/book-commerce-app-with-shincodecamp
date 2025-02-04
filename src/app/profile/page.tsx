@@ -8,9 +8,12 @@ import PurchaseDetailBook from "../components/PurchaseDetailBook";
 export default async function ProfilePage() {
   const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User;
-  const res = await fetch(`${process.env.API_URL}/purchases/${user.id}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`,
+    {
+      cache: "no-store",
+    }
+  );
   const purchaseData = await res.json();
   const purchaseDetailBooks = await Promise.all(
     purchaseData.map(async (purchase: Purchase) => {

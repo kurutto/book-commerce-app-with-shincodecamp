@@ -20,7 +20,7 @@ const Book = ({ book, isPurchased }: BookProps) => {
   const startCheckout = async () => {
     try {
       const response = await fetch(
-        `${process.env.API_URL}/checkout`,
+        `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
         {
           method: "POST",
           body: JSON.stringify({
